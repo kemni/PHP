@@ -1,0 +1,25 @@
+/**
+ * @param string
+ * @param string
+ * @param string
+ * @return string
+ */
+function get_if_date_format_accurate_and_convert_format($date,$format_chk,$format_to)
+{
+    $obj_dt = DateTime::createFromFormat($format_chk, $date);
+
+    if ($obj_dt===false) {
+        return false;
+    }
+
+    return $obj_dt->format($format_to);
+}
+
+/*
+$date = '13/6/2003';
+
+echo get_if_date_format_accurate_and_convert_format($date,'j/m/Y','Y-m-d');
+
+// Output
+2003-06-13
+*/
