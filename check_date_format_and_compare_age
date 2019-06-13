@@ -1,0 +1,48 @@
+/**
+ * @param string
+ * @param string
+ * @param integer
+ * @param string g - greater l - less ge - greater or equal gl - less or equal
+ * @param string false - current date string - date 1 to minus date 2 from
+ * @return boolean
+ */
+function get_if_date_format_accurate_and_compare_age($date,$format,$age_number,$type,$compare_date=false)
+{
+    $obj_dt = DateTime::createFromFormat($format, $date);
+
+    if ($obj_dt===false) {
+        return false;
+    }
+
+    echo $c_date = $compare_date===false ? date('Y-m-d') : $compare_date;
+
+    $datetime = new DateTime($c_date);
+
+    $interval = $obj_dt->diff($datetime,true);
+
+    echo $years = $interval->format('%y');
+
+    if (($type === 'g') && ($years > $age_number)) {
+        return true;
+    } else if (($type === 'l') && ($years < $age_number)) {
+        return true;
+    } else if (($type === 'ge') && ($years <= $age_number)) {
+        return true;
+    } else if (($type === 'le') && ($years <= $age_number)) {
+        return true;
+    }
+
+    return false;
+}
+
+/*
+$date = '13/6/2003';
+
+echo get_if_date_format_accurate_and_compare_age($date,'j/m/Y',18,'g') ? 'Grtr than18' : '!Grtr than18';
+
+echo get_if_date_format_accurate_and_compare_age($date,'j/m/Y',18,'l','2023-06-13') ? 'Less than18' : '!Less than18';
+
+// Output
+!Grtr than18
+!Less than18
+*/
