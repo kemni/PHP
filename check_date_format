@@ -1,0 +1,16 @@
+/**
+ * @param string
+ * @param string
+ * @return boolean
+ */
+function get_if_date_format_accurate($date,$format)
+{
+    $obj_dt = DateTime::createFromFormat($format, $date);
+    return ($obj_dt===false) ? false : true;
+}
+
+/*
+$date = '13/6/2003';
+
+echo get_if_date_format_accurate($date,'j/m/Y') ? 'Ok' : 'Wasted';
+*/
